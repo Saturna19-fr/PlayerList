@@ -1,5 +1,5 @@
 var IsDarkMode = true
-
+IsDarkMode = document.querySelector("html").getAttribute('data-bs-theme') == "dark"
 const exampleModal = document.getElementById('playerIdentifiers')
 if (exampleModal) {
   exampleModal.addEventListener('show.bs.modal', event => {
@@ -39,7 +39,13 @@ toggledarkmode.addEventListener('click', event => {
     IsDarkMode = true
 
   }
-
+  let color = document.querySelector("html").getAttribute("data-bs-theme")
+  fetch('/setcookie', {
+    method: 'POST',
+    headers: {
+      "selectedColors": color
+    }
+  })
 })
 // const playerIdentifiers = document.getElementById('playerIdentifiers')
 // if (playerIdentifiers) {
