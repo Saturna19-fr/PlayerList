@@ -1,3 +1,5 @@
+var IsDarkMode = true
+
 const exampleModal = document.getElementById('playerIdentifiers')
 if (exampleModal) {
   exampleModal.addEventListener('show.bs.modal', event => {
@@ -25,6 +27,20 @@ function copyText(button) {
   document.execCommand("copy");
 }
 
+const toggleDarkModeBtn = document.getElementById('toggledarkmode')
+toggledarkmode.addEventListener('click', event => {
+  if (IsDarkMode) {
+    document.querySelector("html").setAttribute("data-bs-theme", "light")
+    IsDarkMode = false
+  }
+  else
+  {
+    document.querySelector("html").setAttribute("data-bs-theme", "dark")
+    IsDarkMode = true
+
+  }
+
+})
 // const playerIdentifiers = document.getElementById('playerIdentifiers')
 // if (playerIdentifiers) {
 //   playerIdentifiers.addEventListener('show.bs.modal', event => {

@@ -19,20 +19,8 @@ async def index():
         data = res.json()
         plrs = [{"playerName": player["name"], "id": player["id"], "license": player["identifiers"][0]} for player in data["Data"]["players"]]
         plrs = sorted(plrs, key=sortitems)
-        # currentPlayers = ""
-        # for i in plrs:
-        #     print(i)
-        #     currentPlayers + str(i)
-        # # for item in data["Data"]["players"]:
-        # print("currentPlayers", currentPlayers)
-        # currentPlayers = "\n".join(plrs).replace('\n', "<br>")
         
         return render_template("index.html", players = plrs)
-
-        # return currentPlayers
-
-    # return json.dumps(data["Data"]["players"])
-    # return res.json()
 
 @app.errorhandler(werkzeug.exceptions.BadRequest)
 def handle_bad_request(e):
