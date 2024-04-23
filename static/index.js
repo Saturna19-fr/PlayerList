@@ -47,6 +47,8 @@ toggledarkmode.addEventListener('click', event => {
     }
   })
 })
+
+
 // const playerIdentifiers = document.getElementById('playerIdentifiers')
 // if (playerIdentifiers) {
 //   playerIdentifiers.addEventListener('show.bs.modal', event => {
