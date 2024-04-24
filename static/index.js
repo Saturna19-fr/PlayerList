@@ -48,7 +48,9 @@ toggledarkmode.addEventListener('click', event => {
   })
 })
 
-
+setInterval(function() {
+  window.location.reload();
+}, 300000); // in ms
 // const playerIdentifiers = document.getElementById('playerIdentifiers')
 // if (playerIdentifiers) {
 //   playerIdentifiers.addEventListener('show.bs.modal', event => {
