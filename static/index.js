@@ -1,3 +1,5 @@
+let selected = []
+
 var IsDarkMode = true
 IsDarkMode = document.querySelector("html").getAttribute('data-bs-theme') == "dark"
 const exampleModal = document.getElementById('playerIdentifiers')
@@ -24,7 +26,7 @@ function copyText(button) {
   var text = button.previousElementSibling;
   
   text.select();
-  document.execCommand("copy");
+  navigator.clipboard.writeText(text.value);
 }
 
 const toggleDarkModeBtn = document.getElementById('toggledarkmode')
@@ -62,20 +64,53 @@ if (AlertUpdate){
 setInterval(function() {
   window.location.reload();
 }, 300000); // in ms
-// const playerIdentifiers = document.getElementById('playerIdentifiers')
-// if (playerIdentifiers) {
-//   playerIdentifiers.addEventListener('show.bs.modal', event => {
-//     // Button that triggered the modal
-//     const button = event.relatedTarget
-//     // Extract info from data-bs-* attributes
-//     // const recipient = button.getAttribute('data-bs-identifier')
-//     const recipient = "test"
 
-//     // Update the modal's content.
-//     const modalTitle = playerIdentifiers.querySelector('.modal-title')
-//     const modalBodyInput = playerIdentifiers.querySelector('.modal-body input')
+var BanReasonsDiv = document.getElementById("banreasons")
 
-//     modalTitle.textContent = `New message to ${recipient}`
-//     modalBodyInput.value = recipient
-//   })
-// }
+fetch('/static/banreasons.json') // URL du fichier JSON
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data); // Traitez les données JSON ici
+        data.forEach(ban => {
+          console.log(`bansmall: ${ban.bansmall}`);
+          const button = document.createElement("button");
+    
+          
+          // Définir la classe Bootstrap et le type de bouton
+          
+          button.type = "button";
+          
+          button.className = "btn"; // Utilise Bootstrap pour le style
+
+          
+          // Ajouter le texte au bouton
+          
+          button.textContent = ban.bansmall;
+
+          
+          // Ajouter un attribut personnalisé (data-bs-banreason)
+          
+          button.setAttribute("data-bs-banreason", ban.bansmall);
+          button.setAttribute("data-bs-toggle", "button")
+          button.setAttribute("data-bs-placement", "top")
+          button.setAttribute("data-bs-title", ban.banlarge)
+
+          
+          // Ajouter le bouton au div
+          
+          BanReasonsDiv.appendChild(button);
+          
+          new bootstrap.Tooltip(button)
+        })
+    })
+    .catch(error => {
+        console.error('Il y a eu une erreur:', error);
+    });
+
+// const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+// const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
