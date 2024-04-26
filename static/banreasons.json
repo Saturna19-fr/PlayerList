@@ -7,44 +7,8 @@
     },
     {
         "bantime":12,
-        "bansmall": "Nofear",
-        "banlarge": "No Fear RP",
-        "hint": "Non respect de la peur RP"
-    },
-    {
-        "bantime":12,
-        "bansmall": "Nofear",
-        "banlarge": "No Fear RP",
-        "hint": "Non respect de la peur RP"
-    },
-    {
-        "bantime":12,
-        "bansmall": "Nofear",
-        "banlarge": "No Fear RP",
-        "hint": "Non respect de la peur RP"
-    },
-    {
-        "bantime":12,
-        "bansmall": "Nofear",
-        "banlarge": "No Fear RP",
-        "hint": "Non respect de la peur RP"
-    },
-    {
-        "bantime":12,
-        "bansmall": "Nofear",
-        "banlarge": "No Fear RP",
-        "hint": "Non respect de la peur RP"
-    },
-    {
-        "bantime":12,
-        "bansmall": "Nofear",
-        "banlarge": "No Fear RP",
-        "hint": "Non respect de la peur RP"
-    },
-    {
-        "bantime":12,
-        "bansmall": "Nofear",
-        "banlarge": "No Fear RP",
-        "hint": "Non respect de la peur RP"
+        "bansmall": "No Pain",
+        "banlarge": "No Pain RP",
+        "hint": "Non respect de la douleur RP"
     }
 ]

@@ -21,6 +21,14 @@ if (exampleModal) {
   })
 }
 
+function RemoveItem(array, item){
+  if (array.includes(item)){
+    selected = array.filter(function(elem) {
+      return elem !== item;
+  });
+  }
+}
+
 function copyText(button) {
   alert("Le bouton copy ne fonctionne pas encore.")
   var text = button.previousElementSibling;
@@ -58,12 +66,8 @@ if (AlertUpdate){
   const seconds = String(now.getSeconds()).padStart(2, '0');
 
   const formattedTime = `${hours}:${minutes}:${seconds}`;
-  AlertUpdate.textContent = "Mis à jour à "+ formattedTime
+  AlertUpdate.textContent = "Mis à jour à "+ formattedTime + " !"
 }
-
-setInterval(function() {
-  window.location.reload();
-}, 300000); // in ms
 
 var BanReasonsDiv = document.getElementById("banreasons")
 
@@ -105,10 +109,26 @@ fetch('/static/banreasons.json') // URL du fichier JSON
           
           BanReasonsDiv.appendChild(button);
           
-          new bootstrap.Tooltip(button)
+          
+          button.addEventListener("click", event => {
+            if (button.classList.contains("active")) {
+              console.log("On add")
+              selected.push(button.textContent);
+            }
+            else {
+              RemoveItem(selected, button.textContent)
+            }
+            console.log(selected)
+            if (selected.length == 0){
+              document.getElementById("banreason").value = "" // Juste pour afficher la demande de mettre des éléments.
+            } else {
+              document.getElementById("banreason").value = "/ban " + "12 " + `${selected.join(", ")}`
+            }
+          })
+          // new bootstrap.Tooltip(button)
         })
-    })
-    .catch(error => {
+      })
+      .catch(error => {
         console.error('Il y a eu une erreur:', error);
     });
 
