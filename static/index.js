@@ -5,19 +5,31 @@ IsDarkMode = document.querySelector("html").getAttribute('data-bs-theme') == "da
 const exampleModal = document.getElementById('playerIdentifiers')
 if (exampleModal) {
   exampleModal.addEventListener('show.bs.modal', event => {
-    // Button that triggered the modal
-    const button = event.relatedTarget
-    // Extract info from data-bs-* attributes
-    const recipient = button.getAttribute('data-bs-identifier')
-    // If necessary, you could initiate an Ajax request here
-    // and then do the updating in a callback.
 
-    // Update the modal's content.
+    const button = event.relatedTarget
+
+    const recipient = button.getAttribute('data-bs-identifier')
+    
     const modalTitle = exampleModal.querySelector('.modal-title')
     const modalBodyInput = exampleModal.querySelector('.showlicense')
 
     modalTitle.textContent = `License de ${button.textContent}`
     modalBodyInput.value = recipient
+  })
+  exampleModal.addEventListener('hidden.bs.modal', event => {
+    if (document.querySelector(".banreasons")){
+      const em = document.querySelector(".banreasons");
+      const em2 = document.querySelector(".banreason");
+      em2.value = ""
+      var childElements = em.children;
+
+      for (var i = 0; i < childElements.length; i++) {
+          if (childElements[i].classList.contains("active")){
+            RemoveItem(selected, childElements[i].textContent)
+            childElements[i].classList.remove("active");
+          }
+      }
+    }
   })
 }
 
@@ -79,9 +91,7 @@ fetch('/static/banreasons.json') // URL du fichier JSON
         return response.json();
     })
     .then(data => {
-        console.log(data); // Traitez les données JSON ici
         data.forEach(ban => {
-          console.log(`bansmall: ${ban.bansmall}`);
           const button = document.createElement("button");
     
           
@@ -112,25 +122,20 @@ fetch('/static/banreasons.json') // URL du fichier JSON
           
           button.addEventListener("click", event => {
             if (button.classList.contains("active")) {
-              console.log("On add")
               selected.push(button.textContent);
             }
             else {
               RemoveItem(selected, button.textContent)
             }
-            console.log(selected)
+            let player = document.getElementById('exampleModalLabel').textContent.match(/\[(.*?)\]/)
             if (selected.length == 0){
               document.getElementById("banreason").value = "" // Juste pour afficher la demande de mettre des éléments.
             } else {
-              document.getElementById("banreason").value = "/ban " + "12 " + `${selected.join(", ")}`
+              document.getElementById("banreason").value = "/ban " + `${player[1]} ` + "12 " + `${selected.join(", ")}`
             }
           })
-          // new bootstrap.Tooltip(button)
         })
       })
       .catch(error => {
         console.error('Il y a eu une erreur:', error);
     });
-
-// const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-// const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
