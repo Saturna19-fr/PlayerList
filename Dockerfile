@@ -10,9 +10,9 @@ COPY . /app
 # Install the application dependencies
 # RUN pip install -r requirements.txt
 
-# RUN pip install flask
-# RUN pip install flask[async]
-# RUN pip install httpx
+RUN pip install flask
+RUN pip install flask[async]
+RUN pip install httpx
 
 # Define the entry point for the container
 CMD ["python", "main.py", "runserver", "0.0.0.0:8000"]
