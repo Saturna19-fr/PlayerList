@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request, make_response, url_for
+from flask import Flask, jsonify, render_template, request, make_response, url_for, send_file
 import werkzeug
 import json
 import httpx
@@ -29,7 +29,10 @@ async def setcookie():
     resp = make_response()
     resp.set_cookie("sitecolor", request.headers["selectedColors"], expires=datetime.date(2025, 4, 23))
     return resp
-
+@app.route("/cover.png")
+async def cover():
+    return send_file("static/cover.png", mimetype='image/png')
+    
 @app.errorhandler(werkzeug.exceptions.BadRequest)
 def handle_bad_request(e):
     pass
