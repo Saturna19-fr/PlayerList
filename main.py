@@ -37,4 +37,4 @@ async def cover():
 def handle_bad_request(e):
     pass
 
-app.run("0.0.0.0", 80, True, True)
+app.run("127.0.0.1", 3000, True, True)
