@@ -19,7 +19,8 @@ async def index():
         
         res = await client.get(f'https://servers-frontend.fivem.net/api/servers/single/{server_id}')
         data = res.json()
-        plrs = [{"playerName": player["name"], "id": player["id"], "license": player["identifiers"][0]} for player in data["Data"]["players"]]
+        #plrs = [{"playerName": player["name"], "id": player["id"], "license": player["identifiers"][0]} for player in data["Data"]["players"]]
+        plrs = [{"playerName": player["name"], "id": player["id"], "license": "License non détectée"} for player in data["Data"]["players"]]
         plrs = sorted(plrs, key=sortitems)
         
         return render_template("index.html", players = plrs, siteColor = siteColor if siteColor else "light")
